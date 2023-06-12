@@ -8,6 +8,14 @@ export async function POST(
 ) {
   const res = await request.json();
 
+  if (!params.id) {
+    return NextResponse.json({ error: "Missing room id" });
+  }
+
+  if (!res.userId || !res.message) {
+    return NextResponse.json({ error: "Missing userId or message" });
+  }
+
   const newChat = await prisma.chat.create({
     data: {
       roomId: Number(params.id),

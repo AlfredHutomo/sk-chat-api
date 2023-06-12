@@ -5,6 +5,10 @@ import { prisma } from "~/utils/prisma";
 export async function POST(request: Request) {
   const res = await request.json();
 
+  if (!res.userId || !res.doctorId) {
+    return NextResponse.json({ error: "Missing userId or doctorId" });
+  }
+
   const newRoom = await prisma.room.create({
     data: {
       userId: String(res.userId),
