@@ -6,7 +6,7 @@ export async function GET(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const roomWithChats = prisma.room.findFirst({
+  const roomWithChats = await prisma.room.findUnique({
     where: {
       id: Number(params.id),
     },
@@ -14,6 +14,8 @@ export async function GET(
       chats: true,
     },
   });
+
+  console.log(roomWithChats);
 
   return NextResponse.json(roomWithChats);
 }

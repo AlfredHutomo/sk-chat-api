@@ -11,8 +11,8 @@ export async function POST(
   const newChat = await prisma.chat.create({
     data: {
       roomId: Number(params.id),
-      userId: res.userId,
-      message: res.message,
+      userId: String(res.userId),
+      message: String(res.message),
     },
   });
 
