@@ -1,14 +1,19 @@
 import { NextResponse } from "next/server";
+import { prisma } from "~/utils/prisma";
 
 // Get Rooms object based on room id
 export async function GET(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  console.log(params.id);
-  console.log("GET triggered");
-  //   const res = await request.json();
-  //   console.log(res);
+  const roomWithChats = prisma.room.findFirst({
+    where: {
+      id: Number(params.id),
+    },
+    include: {
+      chats: true,
+    },
+  });
 
-  return NextResponse.json({ hello: "world" });
+  return NextResponse.json(roomWithChats);
 }

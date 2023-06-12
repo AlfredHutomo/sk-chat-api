@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
@@ -26,4 +27,5 @@ model Chat {
   seenAt  DateTime?
   Room    Room?     @relation(fields: [roomId], references: [id])
   roomId  Int?
+  userId  String
 }

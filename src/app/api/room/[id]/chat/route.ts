@@ -1,10 +1,20 @@
 import { NextResponse } from "next/server";
+import { prisma } from "~/utils/prisma";
 
 // Create a chat for the room id in route room/[id]/chat
-export async function POST(request: Request) {
-  console.log("POST triggered");
+export async function POST(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   const res = await request.json();
-  console.log(res);
 
-  return NextResponse.json(res);
+  const newChat = await prisma.chat.create({
+    data: {
+      roomId: Number(params.id),
+      userId: res.userId,
+      message: res.message,
+    },
+  });
+
+  return NextResponse.json(newChat);
 }
