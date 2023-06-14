@@ -19,22 +19,31 @@ export async function GET(request: Request) {
     },
   });
 
-  let response = NextResponse.json(roomWithChats);
+  return new Response(JSON.stringify(roomWithChats), {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
 
-  response.headers.set(
-    "Access-Control-Allow-Origin",
-    "*" // Allow all origins
-  );
-  response.headers.set(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS" // Allow the request methods.
-  );
-  response.headers.set(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization" // Allow the headers.
-  );
+  // let response = NextResponse.json(roomWithChats);
 
-  return response;
+  // response.headers.set(
+  //   "Access-Control-Allow-Origin",
+  //   "*" // Allow all origins
+  // );
+  // response.headers.set(
+  //   "Access-Control-Allow-Methods",
+  //   "GET, POST, PUT, DELETE, OPTIONS" // Allow the request methods.
+  // );
+  // response.headers.set(
+  //   "Access-Control-Allow-Headers",
+  //   "Content-Type, Authorization" // Allow the headers.
+  // );
+
+  // return response;
 }
 
 // Create a chat for the room id in route room/[id]/chat
@@ -57,6 +66,15 @@ export async function POST(request: Request) {
       roomId: Number(roomId),
       userId: String(res.userId),
       message: String(res.message),
+    },
+  });
+
+  return new Response(JSON.stringify(newChat), {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
     },
   });
 

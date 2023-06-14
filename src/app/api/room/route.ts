@@ -28,22 +28,31 @@ export async function GET(request: Request) {
     });
   }
 
-  let response = NextResponse.json(userRooms);
+  return new Response(JSON.stringify(userRooms), {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
 
-  response.headers.set(
-    "Access-Control-Allow-Origin",
-    "*" // Allow all origins
-  );
-  response.headers.set(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS" // Allow the request methods.
-  );
-  response.headers.set(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization" // Allow the headers.
-  );
+  // let response = NextResponse.json(userRooms);
 
-  return response;
+  // response.headers.set(
+  //   "Access-Control-Allow-Origin",
+  //   "*" // Allow all origins
+  // );
+  // response.headers.set(
+  //   "Access-Control-Allow-Methods",
+  //   "GET, POST, PUT, DELETE, OPTIONS" // Allow the request methods.
+  // );
+  // response.headers.set(
+  //   "Access-Control-Allow-Headers",
+  //   "Content-Type, Authorization" // Allow the headers.
+  // );
+
+  // return response;
 }
 
 // Create chat room
@@ -61,20 +70,29 @@ export async function POST(request: Request) {
     },
   });
 
-  let response = NextResponse.json(newRoom);
+  return new Response(JSON.stringify(newRoom), {
+    status: 200,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
+  });
 
-  response.headers.set(
-    "Access-Control-Allow-Origin",
-    "*" // Allow all origins
-  );
-  response.headers.set(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS" // Allow the request methods.
-  );
-  response.headers.set(
-    "Access-Control-Allow-Headers",
-    "Content-Type, Authorization" // Allow the headers.
-  );
+  // let response = NextResponse.json(newRoom);
 
-  return NextResponse.json(newRoom);
+  // response.headers.set(
+  //   "Access-Control-Allow-Origin",
+  //   "*" // Allow all origins
+  // );
+  // response.headers.set(
+  //   "Access-Control-Allow-Methods",
+  //   "GET, POST, PUT, DELETE, OPTIONS" // Allow the request methods.
+  // );
+  // response.headers.set(
+  //   "Access-Control-Allow-Headers",
+  //   "Content-Type, Authorization" // Allow the headers.
+  // );
+
+  // return NextResponse.json(newRoom);
 }
