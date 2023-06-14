@@ -24,5 +24,20 @@ export async function POST(
     },
   });
 
-  return NextResponse.json(newChat);
+  let response = NextResponse.json(newChat);
+
+  response.headers.set(
+    "Access-Control-Allow-Origin",
+    "*" // Allow all origins
+  );
+  response.headers.set(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS" // Allow the request methods.
+  );
+  response.headers.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization" // Allow the headers.
+  );
+
+  return response;
 }

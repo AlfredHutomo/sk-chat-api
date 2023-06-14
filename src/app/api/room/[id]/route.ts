@@ -19,7 +19,20 @@ export async function GET(
     },
   });
 
-  console.log(roomWithChats);
+  let response = NextResponse.json(roomWithChats);
 
-  return NextResponse.json(roomWithChats);
+  response.headers.set(
+    "Access-Control-Allow-Origin",
+    "*" // Allow all origins
+  );
+  response.headers.set(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, DELETE, OPTIONS" // Allow the request methods.
+  );
+  response.headers.set(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization" // Allow the headers.
+  );
+
+  return response;
 }
